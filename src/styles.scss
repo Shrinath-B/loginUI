@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~font-awesome/css/font-awesome.min.css';
+
+.site-background {
+    background-color: #2f3338;
+}
+
+.nav { 
+    width: 100%;
+}
+.nav li { 
+    width: 25%; 
+    text-align: center; 
+}
+
+
+.mts-25 {
+    margin-top: 25px;
+}

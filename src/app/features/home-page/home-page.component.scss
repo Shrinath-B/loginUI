@@ -1,0 +1,93 @@
+
+.login-container {
+    border: 2px solid white;
+    border-radius: 10px;
+    box-shadow: grey 0 0 18px;
+    background: darkslategrey;
+    text-align: center;
+    height: 50%;
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    margin-top: 15%
+}
+
+.nav { 
+    width: 100%;
+}
+.nav li { 
+    width: 25%; 
+    text-align: center; 
+}
+
+.login-title {
+  display: block;
+  font-family: Poppins-Bold;
+  font-size: 39px;
+  color: white;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.username:focus-within .fa-user, .password:focus-within .fa-lock {
+    color: blue;
+}
+
+.form-control:focus::-webkit-input-placeholder {
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    text-indent: -100%;
+    opacity: 1;
+  }
+
+
+  .login100-form-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  .login100-form-avatar img {
+    width: 100%;
+  }
+
+  .txt1 {
+    font-family: Montserrat-Regular;
+    font-size: 16px;
+    color: #cccccc;
+    line-height: 1.4;
+  }
+
+  a {
+	font-family: Montserrat-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+	transition: all 0.4s ease-out;
+	-webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+
+a:focus {
+	outline: none !important;
+}
+
+a:hover {
+	text-decoration: none;
+  color: #fff;
+}
+
+.fa-exclamation-circle {
+    color: red;
+}
+
+.errorMsg {
+    color: indianred;
+    text-align: left;
+}
