@@ -1,0 +1,66 @@
+.signup-container {
+	border: 2px solid white;
+	border-radius: 10px;
+	box-shadow: grey 0 0 18px;
+	background: darkslategrey;
+	text-align: center;
+	width: 100%;
+	max-width: 600px;
+	padding: 15px;
+	margin: auto;
+	margin-top: 5%
+}
+
+.input-icon:focus-within .fa-user {
+	color: blue;
+}
+
+.input-icon:focus-within .fa-id-card {
+	color: blue;
+}
+
+.input-icon:focus-within .fa-calendar {
+	color: blue;
+}
+
+.input-icon:focus-within .fa-mobile {
+	color: blue;
+}
+
+.input-icon:focus-within .fa-envelope {
+	color: blue;
+}
+
+.input-icon:focus-within .fa-lock {
+	color: blue;
+}
+
+.fa-exclamation-circle {
+	color: orangered;
+}
+
+.form-control:focus::-webkit-input-placeholder {
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	transition: all 0.4s;
+	text-indent: -100%;
+	opacity: 1;
+}
+
+.txt1 {
+	font-family: Montserrat-Regular;
+	font-size: 16px;
+	color: #cccccc;
+	line-height: 1.4;
+}
+
+.errorMsg {
+	color: indianred;
+	text-align: left;
+}
+
+.invalid-date {
+	border: solid 2px red;
+	border-radius: 8px !important;
+}

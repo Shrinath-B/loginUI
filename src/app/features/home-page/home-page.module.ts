@@ -5,10 +5,12 @@ import { CommonModule } from '@angular/common';
 
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { HomePageComponent } from './home-page.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [HomePageComponent, SignupFormComponent],
@@ -18,7 +20,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     InputTextModule,
-    SharedModule
+    CalendarModule,
+    SharedModule,
+    NgbModule
   ],
   providers: [HomePageService]
 })

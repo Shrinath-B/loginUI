@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { RegisterForm } from '../model/home-page.interface';
 
 @Injectable()
 export class HomePageService {
 
   constructor(private readonly http: HttpClient) { }
 
-  login(username: string, password: string) {
-    const userDetails = {
-      username,
-      password
-    }
-    return this.http.post('http://localhost:4000/login', userDetails);
+  signup(userDetails: RegisterForm) {
+    return this.http.post('http://localhost:4000/signup', userDetails);
   }
 
 }

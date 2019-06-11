@@ -1,6 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-prime-theme/theme/_colors.scss';
+@import '~ngx-prime-theme/theme/_typography.scss';
 @import '~font-awesome/css/font-awesome.min.css';
 
+html,
+body {
+    overflow-x: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body, .root {
+    height: 100%;
+    margin: 0;
+}
+.root {
+    display: flex;
+}
+
+body {
+    position: relative;
+    padding: 50px 0 0 0;
+}
 .site-background {
     background-color: #2f3338;
 }
@@ -16,4 +38,23 @@
 
 .mts-25 {
     margin-top: 25px;
+}
+
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+.text-center {
+    text-align: center;
+}
+.no-pointer {
+    pointer-events: none;
 }

@@ -1,4 +1,196 @@
-<span class="ui-float-label">
-  <input id="float-input" type="text" size="30" pInputText>
-  <label for="float-input">Username</label>
-</span>
+<div class="signup-container">
+
+  <h5 class="text-left">Registration Info</h5>
+  <br>
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <div class="input-group input-group-lg input-icon">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-user"></i></span>
+          </div>
+          <input type="text" class="form-control" formControlName="firstName" placeholder="First Name">
+          <div *ngIf="getRegisterFormControls('firstName').touched && getRegisterFormControls('firstName')?.errors"
+            class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa fa-exclamation-circle"></i>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="getRegisterFormControls('firstName').touched && getRegisterFormControls('firstName')?.errors?.required"
+          class="errorMsg">
+          First Name is required</div>
+      </div>
+      <div class="form-group col-md-6">
+        <div class="input-group input-group-lg input-icon">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-user"></i></span>
+          </div>
+          <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
+          <div *ngIf="getRegisterFormControls('lastName').touched && getRegisterFormControls('lastName')?.errors" class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa fa-exclamation-circle"></i>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="getRegisterFormControls('lastName').touched && getRegisterFormControls('lastName')?.errors?.required"
+          class="errorMsg">
+          Last Name is required</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <div class="input-group input-group-lg input-icon">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-id-card"></i></span>
+          </div>
+          <input type="text" class="form-control" formControlName="userName" placeholder="Username">
+          <div *ngIf="getRegisterFormControls('userName').touched && getRegisterFormControls('userName')?.errors" class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa fa-exclamation-circle"></i>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="getRegisterFormControls('userName').touched && getRegisterFormControls('userName')?.errors" class="errorMsg">
+          <span *ngIf="getRegisterFormControls('userName')?.errors?.required">Username is required</span>
+          <span *ngIf="!getRegisterFormControls('userName')?.errors?.required && getRegisterFormControls('userName')?.errors['invalideUsername']">
+            Username can have only (A-Z, a-z, 0-9, _) characters
+          </span>
+          <span *ngIf="getRegisterFormControls('userName')?.errors['exist']">Username already taken! Please enter a new one</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <div class="input-group input-group-lg input-icon">
+          <select name="gender" class="dropdown-header" formControlName="gender" style="width: 100%" [ngClass]="{'invalid-date': getRegisterFormControls('gender').touched && getRegisterFormControls('gender')?.value === ''}">
+            <option selected disabled value=''>GENDER</option>
+            <option value='male'>Male</option>
+            <option value='female'>Female</option>
+            <option value='other'>Other</option>
+          </select>
+        </div>
+        <div *ngIf="getRegisterFormControls('gender').touched && !getRegisterFormControls('gender')?.value" class="errorMsg">
+          Gender is required</div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <div class="input-group input-group-lg input-icon">
+          <input class="form-control no-pointer" formControlName="dob" placeholder="Date of Birth" name="dp"
+            ngbDatepicker #d="ngbDatepicker" [minDate]="{year: 1980, month: 1, day: 1}" [maxDate]="getMaxDate()" 
+            [ngClass]="{'invalid-date': getRegisterFormControls('dob').touched && getRegisterFormControls('dob')?.errors}" readonly>
+          <div class="input-group-append">
+            <span class="input-group-text" (click)="d.toggle()" type="button">
+              <i class="fa fa-calendar"></i>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="getRegisterFormControls('dob').touched && getRegisterFormControls('dob')?.errors?.required" class="errorMsg">
+          Date of Birth is required</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <div class="input-group input-group-lg input-icon">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-mobile"></i></span>
+          </div>
+          <input type="text" class="form-control" formControlName="phoneNumber" placeholder="Phone" maxlength="10" [appNumberMask]>
+          <div *ngIf="getRegisterFormControls('phoneNumber').touched && getRegisterFormControls('phoneNumber')?.errors"
+            class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa fa-exclamation-circle"></i>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="getRegisterFormControls('phoneNumber').touched && getRegisterFormControls('phoneNumber')?.errors"
+          class="errorMsg">
+          <span *ngIf="getRegisterFormControls('phoneNumber')?.errors?.required">Phone Number is required</span>
+          <span *ngIf="!getRegisterFormControls('phoneNumber')?.errors?.required && getRegisterFormControls('phoneNumber')?.errors['invalidNumber']">
+            Please enter a valid Phone Number
+          </span>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <div class="input-group input-group-lg input-icon">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+          </div>
+          <input type="text" class="form-control" formControlName="email" placeholder="Email">
+          <div *ngIf="getRegisterFormControls('email').touched && getRegisterFormControls('email')?.errors" class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa fa-exclamation-circle"></i>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="getRegisterFormControls('email').touched && getRegisterFormControls('email')?.errors" class="errorMsg">
+          <span *ngIf="getRegisterFormControls('email')?.errors?.required">Email is required</span>
+          <span *ngIf="!getRegisterFormControls('email')?.errors?.required && getRegisterFormControls('email')?.errors['email']">Please enter a valid email id</span>
+          <span *ngIf="getRegisterFormControls('email')?.errors['exist']">Email already registered!</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="form-group col-md-6">
+        <div class="input-group input-group-lg input-icon">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+          </div>
+          <input type="password" class="form-control" formControlName="password" placeholder="Password">
+          <div *ngIf="getRegisterFormControls('password').touched && getRegisterFormControls('password')?.errors" class="input-group-append">
+            <span class="input-group-text" title="Password shoud contain at least 1 lowercase alphabetical character, 1 uppercase alphabetical character, 1 numeric character, one special character and 8 or more characters long.">
+              <i class="fa fa-exclamation-circle"></i>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="getRegisterFormControls('password').touched && getRegisterFormControls('password')?.errors" class="errorMsg">
+          <span *ngIf="getRegisterFormControls('password')?.errors?.required">Password is required</span>
+          <span *ngIf="!getRegisterFormControls('password')?.errors?.required && getRegisterFormControls('password')?.errors['invalidPassword']" title="Password shoud contain at least 1 lowercase alphabetical character, 1 uppercase alphabetical character, 1 numeric character, one special character and 8 or more characters long.">
+            Please enter a valid password
+          </span>
+        </div>
+
+      </div>
+      <div class="form-group col-md-6">
+        <div class="input-group input-group-lg input-icon">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+          </div>
+          <input type="password" class="form-control" formControlName="rePassword" placeholder="Confirm Password">
+          <div *ngIf="getRegisterFormControls('rePassword').touched && getRegisterFormControls('rePassword')?.errors"
+            class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa fa-exclamation-circle"></i>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="getRegisterFormControls('rePassword').touched && getRegisterFormControls('rePassword')?.errors"
+          class="errorMsg">
+          <span *ngIf="getRegisterFormControls('rePassword')?.errors?.required">Password is required</span>
+          <span *ngIf="!getRegisterFormControls('rePassword')?.errors?.required && getRegisterFormControls('rePassword')?.errors['invalidPassword']" title="Password shoud contain at least 1 lowercase alphabetical character, 1 uppercase alphabetical character, 1 numeric character, one special character and 8 or more characters long.">
+            Please enter a valid password
+          </span>
+          <span *ngIf="getRegisterFormControls('rePassword')?.errors['mismatch']">Password should be same</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create Account</button>
+      </div>
+    </div>
+
+    <div class="form-group mt-3">
+      <a class="txt1" routerLink="login">
+        Already have an account? Login
+      </a>
+    </div>
+  </form>
+</div>

@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { HomePageService } from './services/home-page.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-home-page',
@@ -14,15 +15,20 @@ export class HomePageComponent implements OnInit {
   loginForm: FormGroup;
   loginFail: boolean;
 
-  constructor(private readonly fb: FormBuilder, private readonly homePageService: HomePageService,
-    private readonly router: Router) {
-    this.loginForm = fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-    });
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly homePageService: HomePageService,
+    private readonly router: Router, private readonly authService: AuthService) {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigateByUrl('dashboard');
+    }
   }
 
   ngOnInit() {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
   getLoginFormControls(controlName?: string) {
@@ -32,8 +38,9 @@ export class HomePageComponent implements OnInit {
   onLogin() {
     this.loginFail = false;
     if (this.loginForm.valid) {
-      this.homePageService.login(this.getLoginFormControls('username').value, this.getLoginFormControls('password').value).subscribe(
-        (data) => {
+      this.authService.login(this.getLoginFormControls('username').value, this.getLoginFormControls('password').value).subscribe(
+        (data: any) => {
+          console.log(data);
           this.router.navigateByUrl('dashboard');
         },
         (error) => {
@@ -41,8 +48,7 @@ export class HomePageComponent implements OnInit {
           this.loginForm.reset();
         },
         () => {
-        }
-      )
+        });
     } else {
       this.setErrors('username');
       this.setErrors('password');
